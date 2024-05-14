@@ -557,9 +557,28 @@ MazeSolver.prototype.draw = function() {
 }
 
 MazeSolver.prototype.handleUserInput = function(event) {
-    // Handle user input to move through the maze
+    // Handle arrow key presses to move through the maze
     const key = event.key;
-    const newPosition = this.getNewPosition(key);
+    let newDirection;
+
+    switch (key) {
+        case "ArrowUp":
+            newDirection = "n";
+            break;
+        case "ArrowDown":
+            newDirection = "s";
+            break;
+        case "ArrowLeft":
+            newDirection = "w";
+            break;
+        case "ArrowRight":
+            newDirection = "e";
+            break;
+        default:
+            return; // Exit function for other keys
+    }
+
+    const newPosition = this.getNewPosition(newDirection);
 
     if (newPosition) {
         // Check if the new position is valid
@@ -575,6 +594,45 @@ MazeSolver.prototype.handleUserInput = function(event) {
             }
         }
     }
+}
+
+MazeSolver.prototype.getNewPosition = function(direction) {
+    // Get the new position based on user input direction
+    const currentPosition = this.currentPosition;
+    let newX, newY;
+
+    switch (direction) {
+        case "n":
+            newX = currentPosition.x;
+            newY = currentPosition.y - 1;
+            break;
+        case "s":
+            newX = currentPosition.x;
+            newY = currentPosition.y + 1;
+            break;
+        case "w":
+            newX = currentPosition.x - 1;
+            newY = currentPosition.y;
+            break;
+        case "e":
+            newX = currentPosition.x + 1;
+            newY = currentPosition.y;
+            break;
+        default:
+            return false;
+    }
+
+    return { x: newX, y: newY };
+}
+
+MazeSolver.prototype.isWall = function(position) {
+    // Check if the given position is a wall
+    // Return true if it's a wall, false otherwise
+}
+
+MazeSolver.prototype.redraw = function() {
+    // Redraw the maze with the updated position
+    // Code to redraw the maze here...
 }
 
 MazeSolver.prototype.showResult = function() {
