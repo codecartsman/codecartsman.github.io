@@ -1,4 +1,4 @@
-/*function Solver(maze) {
+function Solver(maze) {
 	this.maze = maze;
 	this.maxSolve = maze.maxSolve;
 	this.start = false;
@@ -609,53 +609,3 @@ MazeSolver.prototype.handleUserInput = function(event) {
         }
     }
 }
-
-MazeSolver.prototype.getNewPosition = function(direction) {
-    // Get the new position based on user input direction
-    const currentPosition = this.currentPosition;
-    let newX, newY;
-
-    switch (direction) {
-        case "n":
-            newX = currentPosition.x;
-            newY = currentPosition.y - 1;
-            break;
-        case "s":
-            newX = currentPosition.x;
-            newY = currentPosition.y + 1;
-            break;
-        case "w":
-            newX = currentPosition.x - 1;
-            newY = currentPosition.y;
-            break;
-        case "e":
-            newX = currentPosition.x + 1;
-            newY = currentPosition.y;
-            break;
-        default:
-            return false;
-    }
-
-    return { x: newX, y: newY };
-}
-
-MazeSolver.prototype.isWall = function(position) {
-    // Check if the given position is a wall
-    // Code to check if position is a wall here...
-}
-
-MazeSolver.prototype.redraw = function() {
-    // Redraw the maze with the updated position
-    // Code to redraw the maze here...
-}
-
-MazeSolver.prototype.showResult = function() {
-    // Display the result of the maze solving (e.g., draw the solved path)
-    // Code to display result here...
-}
-
-// Rest of the methods remain the same...
-
-// Initialize the maze solver
-const mazeSolver = new MazeSolver(yourMaze);
-mazeSolver.draw();
