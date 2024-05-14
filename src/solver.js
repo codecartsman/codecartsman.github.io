@@ -530,6 +530,7 @@ function MazeSolver(maze) {
     this.path = false;
     this.currentPosition = false;
     this.timeout = false; // Flag to track timeout
+    this.startTime = false; // Track start time
 }
 
 MazeSolver.prototype.draw = function() {
@@ -546,14 +547,27 @@ MazeSolver.prototype.draw = function() {
     // Add event listener to handle user input
     canvas.addEventListener('keydown', (event) => this.handleUserInput(event));
 
-    // Set timeout for solving the maze
-    setTimeout(() => {
-        if (!this.path && !this.timeout) {
-            this.timeout = true;
-            alert("Oops! Time out. Here's the result.");
-            this.showResult();
-        }
-    }, 90000); // 90 seconds
+    // Add event listener to solve maze button
+    const solveButton = document.getElementById('solveButton');
+    solveButton.addEventListener('click', () => this.solve());
+
+    // Start timer
+    this.startTime = Date.now();
+    this.startTimer();
+}
+
+MazeSolver.prototype.startTimer = function() {
+    // Start the timer to track the solving time
+    const timerElement = document.getElementById('timer');
+    setInterval(() => {
+        const currentTime = Math.floor((Date.now() - this.startTime) / 1000); // Calculate elapsed time in seconds
+        timerElement.textContent = `Time: ${currentTime} s`;
+    }, 1000); // Update every second
+}
+
+MazeSolver.prototype.solve = function() {
+    // Solving functionality
+    // Code to solve the maze here...
 }
 
 MazeSolver.prototype.handleUserInput = function(event) {
@@ -627,7 +641,7 @@ MazeSolver.prototype.getNewPosition = function(direction) {
 
 MazeSolver.prototype.isWall = function(position) {
     // Check if the given position is a wall
-    // Return true if it's a wall, false otherwise
+    // Code to check if position is a wall here...
 }
 
 MazeSolver.prototype.redraw = function() {
